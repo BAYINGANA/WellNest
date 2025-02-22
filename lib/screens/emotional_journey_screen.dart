@@ -34,7 +34,7 @@ class EmotionalJourneyScreen extends StatelessWidget {
                     const Spacer(),
                     // "HopeHub" in purple
                     Text(
-                      'HopeHub',
+                      'WellNest',
                       style: TextStyle(
                         fontFamily: 'Bitter',
                         fontSize: 26,

@@ -20,7 +20,7 @@ class TherapistScreen extends StatelessWidget {
                     Expanded(
                       child: Center(
                         child: Text(
-                          'HopeHub',
+                          'WellNest',
                           style: TextStyle(
                             color: const Color(0xFF242364),
                             fontSize: 32,

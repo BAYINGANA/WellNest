@@ -53,7 +53,7 @@ class _MoodScreenState extends State<MoodScreen> {
                     ),
                     const Spacer(),
                     Text(
-                      'HopeHub',
+                      'WellNest',
                       style: TextStyle(
                         fontSize: 28,
                         fontWeight: FontWeight.bold,

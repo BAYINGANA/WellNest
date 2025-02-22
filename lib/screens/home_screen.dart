@@ -49,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
   const SizedBox(height: 11),
 
   const Text(
-  'Heyy Shristee!!\nTake whatever you need',
+  'Heyy !!!\nTake whatever you need',
   textAlign: TextAlign.center,
   style: TextStyle(
   fontSize: 16,
@@ -67,7 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
   const SizedBox(height: 20),
 
   const OptionCard(
-  title: 'Psychiatric\nEvaluation',
+  title: 'Support\nGroups',
   imagePath:
   'https://cdn.builder.io/api/v1/image/assets/f19143deba86463b9da27db7e011b3a1/52ad86e8fba29eb93e78221eb33ccad180a263bbe1b808b832917fa9c1f9a4a5?apiKey=f19143deba86463b9da27db7e011b3a1&',
   ),
