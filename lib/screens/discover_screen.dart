@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:wellnest/screens/call_screen.dart';
 // Header and Navigation Bar remain in separate files.
 import 'package:wellnest/widgets/header.dart';
+import 'package:wellnest/widgets/navigation_bar.dart';
 
 class DiscoverScreen extends StatelessWidget {
-  const DiscoverScreen({Key? key}) : super(key: key);
+  const DiscoverScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -32,13 +34,16 @@ class DiscoverScreen extends StatelessWidget {
           ),
         ),
       ),
+      bottomNavigationBar: CustomBottomNavigationBar(
+        selectedIndex: 0,
+      ),
     );
   }
 }
 
 /// Immediate Help Button Section
 class ImmediateHelpButton extends StatelessWidget {
-  const ImmediateHelpButton({Key? key}) : super(key: key);
+  const ImmediateHelpButton({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -65,8 +70,11 @@ class ImmediateHelpButton extends StatelessWidget {
             minimumSize: const Size(289, 50),
           ),
           onPressed: () {
-            // Handle immediate help action here.
-            print('Immediate help button tapped');
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const CallScreen()),
+            );
           },
           child: const Text(
             'Need immediate help!',
@@ -85,7 +93,7 @@ class ImmediateHelpButton extends StatelessWidget {
 
 /// Courses Section with horizontally scrollable clickable cards.
 class CourseSection extends StatelessWidget {
-  const CourseSection({Key? key}) : super(key: key);
+  const CourseSection({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -136,7 +144,7 @@ class CourseSection extends StatelessWidget {
 
 /// Healthy Body Section with clickable cards.
 class HealthyBodySection extends StatelessWidget {
-  const HealthyBodySection({Key? key}) : super(key: key);
+  const HealthyBodySection({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -187,7 +195,7 @@ class HealthyBodySection extends StatelessWidget {
 
 /// Recommendations Section with clickable cards.
 class RecommendationsSection extends StatelessWidget {
-  const RecommendationsSection({Key? key}) : super(key: key);
+  const RecommendationsSection({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -244,11 +252,11 @@ class CourseCard extends StatelessWidget {
   final VoidCallback onTap;
 
   const CourseCard({
-    Key? key,
+    super.key,
     required this.title,
     required this.imageUrl,
     required this.onTap,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -261,7 +269,7 @@ class CourseCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.25),
+              color: Colors.black.withValues(),
               blurRadius: 10,
               offset: const Offset(0, 10),
             ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:wellnest/screens/Discover_screen.dart';
 import 'package:wellnest/screens/home_screen.dart';
 import 'package:wellnest/screens/journal_screen.dart';
+import 'package:wellnest/screens/mood_tracking_screen.dart';
 import 'package:wellnest/screens/profile_screen.dart';
 import 'package:wellnest/screens/support_groups_screen.dart';
 import 'package:wellnest/screens/therapists_screen.dart';
@@ -9,7 +10,7 @@ import 'package:wellnest/screens/therapists_screen.dart';
 class CustomBottomNavigationBar extends StatelessWidget {
   final int selectedIndex;
 
-  const CustomBottomNavigationBar({Key? key, required this.selectedIndex}) : super(key: key);
+  const CustomBottomNavigationBar({super.key, required this.selectedIndex});
 
   void _onBottomNavTap(BuildContext context, int index) {
     Widget nextPage = getPageForIndex(index);
@@ -28,7 +29,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
       case 2:
         return const TherapistScreen();
       case 3:
-        return const JournalScreen();
+        return const MoodScreen();
       case 4:
         return const ProfileScreen();
       default:
@@ -63,8 +64,8 @@ class CustomBottomNavigationBar extends StatelessWidget {
           label: 'Profile',
         ),
       ],
-      selectedItemColor: Color(0xFF8B4513),
-      unselectedItemColor: Color(0xFFDEB887),
+      selectedItemColor: Color(0xFF6EF4A4),
+      unselectedItemColor: Colors.grey,
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wellnest/models/journal.dart';
+import 'package:wellnest/widgets/navigation_bar.dart';
 
 class JournalScreen extends StatefulWidget {
   const JournalScreen({Key? key}) : super(key: key);

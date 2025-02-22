@@ -1,5 +1,7 @@
 // lib/screens/mood_tracking_screen.dart
 import 'package:flutter/material.dart';
+import 'package:wellnest/screens/chat_screen.dart';
+import 'package:wellnest/widgets/navigation_bar.dart';
 
 import '../models/mood.dart';
 import '../services/api_service.dart';
@@ -157,6 +159,9 @@ class _MoodScreenState extends State<MoodScreen> {
           ),
         ),
       ),
+      bottomNavigationBar: CustomBottomNavigationBar(
+        selectedIndex: 3,
+      ),
     );
   }
 
@@ -167,6 +172,11 @@ class _MoodScreenState extends State<MoodScreen> {
         setState(() {
           _pointerAngle = _moodAnglesDegrees[index];
         });
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => ChatScreen()),
+        );
       },
       child: Text(
         emoji,

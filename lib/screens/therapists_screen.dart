@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:wellnest/screens/help_screen.dart';
+import 'package:wellnest/widgets/navigation_bar.dart';
 
 class TherapistScreen extends StatelessWidget {
   const TherapistScreen({Key? key}) : super(key: key);
@@ -115,6 +117,9 @@ class TherapistScreen extends StatelessWidget {
           ),
         ),
       ),
+      bottomNavigationBar: CustomBottomNavigationBar(
+        selectedIndex: 2,
+      ),
     );
   }
 }
@@ -150,8 +155,11 @@ class DoctorCard extends StatelessWidget {
     // Wrap the container in an InkWell or GestureDetector so it's clickable.
     return InkWell(
       onTap: () {
-        // TODO: Handle onTap (navigate, show details, etc.)
-        debugPrint('Tapped on $name');
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => const HelpScreen()),
+        );
       },
       child: Container(
         decoration: BoxDecoration(

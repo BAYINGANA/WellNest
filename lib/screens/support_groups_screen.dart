@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:wellnest/screens/chat_screen.dart';
+import 'package:wellnest/widgets/navigation_bar.dart';
 
 class SupportGroupsScreen extends StatelessWidget {
-  const SupportGroupsScreen({Key? key}) : super(key: key);
+  const SupportGroupsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -61,13 +63,16 @@ class SupportGroupsScreen extends StatelessWidget {
           ),
         ),
       ),
+      bottomNavigationBar: CustomBottomNavigationBar(
+        selectedIndex: 1,
+      ),
     );
   }
 }
 
 // Back Arrow Widget
 class BackArrow extends StatelessWidget {
-  const BackArrow({Key? key}) : super(key: key);
+  const BackArrow({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -82,12 +87,12 @@ class BackArrow extends StatelessWidget {
 
 // Tagline
 class Tagline extends StatelessWidget {
-  const Tagline({Key? key}) : super(key: key);
+  const Tagline({super.key});
 
   @override
   Widget build(BuildContext context) {
     return const Text(
-      'Connect with people who understands you !',
+      'Connect with people who understand you !',
       style: TextStyle(
         fontSize: 20,
         fontWeight: FontWeight.bold,
@@ -101,7 +106,7 @@ class Tagline extends StatelessWidget {
 
 // Grid of Support Groups
 class SupportGroupGrid extends StatelessWidget {
-  const SupportGroupGrid({Key? key}) : super(key: key);
+  const SupportGroupGrid({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -197,18 +202,21 @@ class SupportGroupItem extends StatelessWidget {
   final String title;
 
   const SupportGroupItem({
-    Key? key,
+    super.key,
     required this.imageUrl,
     required this.title,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     // Make the entire container clickable
     return InkWell(
       onTap: () {
-        debugPrint('Clicked on $title');
-        // You can handle navigation or other actions here
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => ChatScreen()),
+        );
       },
       child: Container(
         decoration: BoxDecoration(
