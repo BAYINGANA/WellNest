@@ -62,9 +62,11 @@ class TherapyScreen extends StatelessWidget {
                   mainAxisSpacing: 20,
                   children: [
                     HelpCategoryCard(
-                      image: 'https://br.freepik.com/vetores-premium/ilustracao-de-estilo-simples-de-critica-na-internet_27770461.htm#fromView=search&page=1&position=33&uuid=31a4dcce-e60f-4d27-82a0-ad928cfdac18&query=P%C3%A1gina+3+_+Vetores+e+ilustra%C3%A7%C3%B5es+de+Cyber+bullying+para+download+gratuito+',
+                      image:
+                          'https://br.freepik.com/vetores-premium/ilustracao-de-estilo-simples-de-critica-na-internet_27770461.htm#fromView=search&page=1&position=33&uuid=31a4dcce-e60f-4d27-82a0-ad928cfdac18&query=P%C3%A1gina+3+_+Vetores+e+ilustra%C3%A7%C3%B5es+de+Cyber+bullying+para+download+gratuito+',
                       title: 'Teen Therapy',
-                      description: 'Safe Spaces for Teens,\nStrong Minds for Life.',
+                      description:
+                          'Safe Spaces for Teens,\nStrong Minds for Life.',
                       onTap: () => print('Teen Therapy clicked'),
                     ),
                     HelpCategoryCard(
@@ -76,7 +78,8 @@ class TherapyScreen extends StatelessWidget {
                     HelpCategoryCard(
                       image: 'assets/images/couple_therapy.png',
                       title: 'Couple Therapy',
-                      description: 'Strengthening Bonds,\nEmbracing Growth Together.',
+                      description:
+                          'Strengthening Bonds,\nEmbracing Growth Together.',
                       onTap: () => print('Couple Therapy clicked'),
                     ),
                   ],
@@ -96,11 +99,13 @@ class TherapyScreen extends StatelessWidget {
                     onPressed: () {},
                   ),
                   IconButton(
-                    icon: const Icon(Icons.favorite, size: 30, color: Colors.grey),
+                    icon: const Icon(Icons.favorite,
+                        size: 30, color: Colors.grey),
                     onPressed: () {},
                   ),
                   IconButton(
-                    icon: const Icon(Icons.person, size: 30, color: Colors.grey),
+                    icon:
+                        const Icon(Icons.person, size: 30, color: Colors.grey),
                     onPressed: () {},
                   ),
                 ],
@@ -138,7 +143,7 @@ class HelpCategoryCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.15),
+              color: Colors.black.withValues(alpha: 0.5),
               blurRadius: 5,
               offset: const Offset(0, 4),
             ),
@@ -148,7 +153,8 @@ class HelpCategoryCard extends StatelessWidget {
           children: [
             /// IMAGE
             ClipRRect(
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
+              borderRadius:
+                  const BorderRadius.vertical(top: Radius.circular(12)),
               child: Image.asset(
                 image,
                 width: double.infinity,

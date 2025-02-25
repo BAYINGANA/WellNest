@@ -32,7 +32,8 @@ class CallScreen extends StatelessWidget {
 
                 // Name & Title area
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 81, horizontal: 51),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 81, horizontal: 51),
                   child: GestureDetector(
                     onTap: () {
                       // TODO: Handle name/title tap
@@ -114,7 +115,8 @@ class CallScreen extends StatelessWidget {
                                 height: 18,
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
-                                  color: const Color(0xFF04CA53).withOpacity(0.71),
+                                  color:
+                                      const Color(0xFF04CA53).withOpacity(0.71),
                                 ),
                                 child: Center(
                                   child: Container(
@@ -130,7 +132,8 @@ class CallScreen extends StatelessWidget {
                                         height: 10,
                                         decoration: BoxDecoration(
                                           shape: BoxShape.circle,
-                                          color: const Color(0xFF00FF38).withOpacity(0.59),
+                                          color: const Color(0xFF00FF38)
+                                              .withOpacity(0.59),
                                         ),
                                       ),
                                     ),
@@ -141,7 +144,8 @@ class CallScreen extends StatelessWidget {
                               // Bottom part (volume slider background)
                               Container(
                                 height: 62,
-                                color: const Color(0xFF00FF38).withOpacity(0.59),
+                                color:
+                                    const Color(0xFF00FF38).withOpacity(0.59),
                               ),
                               const SizedBox(height: 5),
                               // Phone icon (green call button)
@@ -169,7 +173,8 @@ class CallScreen extends StatelessWidget {
                         },
                         child: Center(
                           child: Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 3),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 18, vertical: 3),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
                               color: const Color(0xFF726E6E),

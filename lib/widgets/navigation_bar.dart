@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wellnest/screens/Discover_screen.dart';
 import 'package:wellnest/screens/home_screen.dart';
-import 'package:wellnest/screens/journal_screen.dart';
 import 'package:wellnest/screens/mood_tracking_screen.dart';
 import 'package:wellnest/screens/profile_screen.dart';
 import 'package:wellnest/screens/support_groups_screen.dart';
@@ -25,7 +24,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
       case 0:
         return const DiscoverScreen();
       case 1:
-        return const SupportGroupsScreen();
+        return SupportGroupScreen();
       case 2:
         return const TherapistScreen();
       case 3:
