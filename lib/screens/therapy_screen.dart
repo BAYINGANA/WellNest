@@ -21,7 +21,7 @@ class TherapyScreen extends StatelessWidget {
                   ),
                   const Spacer(),
                   const Text(
-                    'HopeHub',
+                    'WellNest',
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,

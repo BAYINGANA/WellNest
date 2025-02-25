@@ -24,7 +24,7 @@ class WellNestApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.white,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: HelpScreen(),
+      home: DiscoverScreen(),
     );
   }
 }
