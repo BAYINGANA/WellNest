@@ -118,7 +118,7 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget _buildOfflineBanner() {
     return Container(
       padding: const EdgeInsets.all(8),
-      color: Colors.amber[100],
+      color: Color(0xFFA1EEBD),
       child: Row(
         children: [
           const Icon(Icons.wifi_off, size: 20, color: Colors.black),

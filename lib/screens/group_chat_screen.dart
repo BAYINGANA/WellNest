@@ -37,7 +37,7 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(widget.groupName)),
+      appBar: AppBar(title: Text(widget.groupName), backgroundColor: Color(0xFFA1EEBD),),
       body: Column(
         children: [
           Expanded(
