@@ -27,7 +27,7 @@ WellNest is a **mental wellness app** designed to help students track their mood
 ### **Installation**  
 1. Clone the repository:  
    ```bash
-   git clone https://github.com/your-username/wellnest-app.git
+   git clone https://github.com/BAYINGANA/wellnest-app.git
    ```  
 2. Navigate to the project directory:  
    ```bash
