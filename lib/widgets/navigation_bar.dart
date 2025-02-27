@@ -55,10 +55,6 @@ class CustomBottomNavigationBar extends StatelessWidget {
           icon: Icon(Icons.menu_book_rounded),
           label: 'Journal',
         ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.person),
-          label: 'Profile',
-        ),
       ],
       selectedItemColor: Color(0xFF6EF4A4),
       unselectedItemColor: Colors.grey,
