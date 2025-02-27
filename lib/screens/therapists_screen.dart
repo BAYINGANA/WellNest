@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:wellnest/screens/help_screen.dart';
+import 'package:wellnest/widgets/navigation_bar.dart';
 
 class TherapistScreen extends StatelessWidget {
-  const TherapistScreen({Key? key}) : super(key: key);
+  const TherapistScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,14 +15,14 @@ class TherapistScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Top Row with Back Arrow and "HopeHub"
+                // Top Row with Back Arrow and "WellNest"
                 Row(
                   children: [
                     const BackArrow(),
                     Expanded(
                       child: Center(
                         child: Text(
-                          'HopeHub',
+                          'WellNest',
                           style: TextStyle(
                             color: const Color(0xFF242364),
                             fontSize: 32,
@@ -30,7 +32,7 @@ class TherapistScreen extends StatelessWidget {
                               Shadow(
                                 offset: const Offset(0, 4),
                                 blurRadius: 4,
-                                color: Colors.black.withOpacity(0.25),
+                                color: Colors.black.withValues(alpha: 0.25),
                               ),
                             ],
                           ),
@@ -41,9 +43,7 @@ class TherapistScreen extends StatelessWidget {
                     const SizedBox(width: 48),
                   ],
                 ),
-
                 const SizedBox(height: 40),
-
                 // Available Offline
                 const Text(
                   'Available Offline',
@@ -55,33 +55,29 @@ class TherapistScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 12),
-
-                const DoctorCard(
+                DoctorCard(
                   name: 'Dr. Devika Rao',
                   specialty:
-                  'LGBTQ+ Issues, Self-Esteem, and Peer Relationships',
+                      'LGBTQ+ Issues, Self-Esteem, and Peer Relationships',
                   imageUrl:
-                  'https://cdn.builder.io/api/v1/image/assets/TEMP/b9e829d0c01ccca2922dca513c8203ee3ef433b6',
+                      'https://cdn.builder.io/api/v1/image/assets/TEMP/b9e829d0c01ccca2922dca513c8203ee3ef433b6',
                 ),
                 const SizedBox(height: 18),
-
-                const DoctorCard(
+                DoctorCard(
                   name: 'Dr. Tanya Khanna',
                   specialty: 'Trauma, Grief, and Identity Issues',
                   imageUrl:
-                  'https://cdn.builder.io/api/v1/image/assets/TEMP/984ebdf27ec9d7a304cf2f79bfcd8a60b7db058a',
+                      'https://cdn.builder.io/api/v1/image/assets/TEMP/984ebdf27ec9d7a304cf2f79bfcd8a60b7db058a',
                 ),
                 const SizedBox(height: 18),
-
-                const DoctorCard(
+                DoctorCard(
                   name: 'Dr. Rajesh Iyer',
                   specialty:
-                  'Academic Pressure, Stress Management, and Career Counseling',
+                      'Academic Pressure, Stress Management, and Career Counseling',
                   imageUrl:
-                  'https://cdn.builder.io/api/v1/image/assets/TEMP/7b96ed8d04e7c11c5eef41e254d701e65c31cd48',
+                      'https://cdn.builder.io/api/v1/image/assets/TEMP/7b96ed8d04e7c11c5eef41e254d701e65c31cd48',
                 ),
                 const SizedBox(height: 18),
-
                 // Available Online
                 const Text(
                   'Available Online',
@@ -93,34 +89,35 @@ class TherapistScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 12),
-
-                const DoctorCard(
+                DoctorCard(
                   name: 'Dr. Karan Mehta',
                   specialty:
-                  'ADHD, Behavioral Disorders, and Emotional Regulation',
+                      'ADHD, Behavioral Disorders, and Emotional Regulation',
                   imageUrl:
-                  'https://cdn.builder.io/api/v1/image/assets/TEMP/068ebb29cec3a6648f55198aa047f7530f368f34',
+                      'https://cdn.builder.io/api/v1/image/assets/TEMP/068ebb29cec3a6648f55198aa047f7530f368f34',
                 ),
                 const SizedBox(height: 18),
-
-                const DoctorCard(
+                DoctorCard(
                   name: 'Dr. Sarah Thompson',
                   specialty:
-                  'Social Anxiety, Technology Use, and Parent-Teen Conflicts',
+                      'Social Anxiety, Technology Use, and Parent-Teen Conflicts',
                   imageUrl:
-                  'https://cdn.builder.io/api/v1/image/assets/TEMP/169ad8b8dc916c938c006b33e4fd0a83bbd2f7eb',
+                      'https://cdn.builder.io/api/v1/image/assets/TEMP/169ad8b8dc916c938c006b33e4fd0a83bbd2f7eb',
                 ),
               ],
             ),
           ),
         ),
       ),
+      bottomNavigationBar: const CustomBottomNavigationBar(
+        selectedIndex: 2,
+      ),
     );
   }
 }
 
 class BackArrow extends StatelessWidget {
-  const BackArrow({Key? key}) : super(key: key);
+  const BackArrow({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -139,19 +136,23 @@ class DoctorCard extends StatelessWidget {
   final String imageUrl;
 
   const DoctorCard({
-    Key? key,
+    super.key,
     required this.name,
     required this.specialty,
     required this.imageUrl,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
-    // Wrap the container in an InkWell or GestureDetector so it's clickable.
+    // Make the container clickable to navigate to HelpScreen.
     return InkWell(
       onTap: () {
-        // TODO: Handle onTap (navigate, show details, etc.)
-        debugPrint('Tapped on $name');
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => HelpScreen(therapistName: name),
+          ),
+        );
       },
       child: Container(
         decoration: BoxDecoration(
@@ -159,7 +160,7 @@ class DoctorCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.25),
+              color: Colors.black.withValues(alpha: 0.25),
               blurRadius: 10,
               offset: const Offset(0, 10),
             ),
@@ -169,7 +170,7 @@ class DoctorCard extends StatelessWidget {
           padding: const EdgeInsets.all(6.0),
           child: Row(
             children: [
-              // Doctor Image
+              // Therapist Image
               ClipRRect(
                 borderRadius: BorderRadius.circular(10),
                 child: Image.network(
@@ -180,8 +181,7 @@ class DoctorCard extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 10),
-
-              // Doctor Info
+              // Therapist Info
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:wellnest/screens/chat_screen.dart'; // Import the new ChatScreen
 
 class HelpScreen extends StatelessWidget {
-  const HelpScreen({Key? key}) : super(key: key);
+  final String therapistName;
+
+  const HelpScreen({super.key, required this.therapistName});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +24,7 @@ class HelpScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                // Back arrow row using the normal back arrow
+                // Back arrow row
                 Padding(
                   padding: const EdgeInsets.fromLTRB(16, 29, 16, 0),
                   child: Row(
@@ -35,7 +39,7 @@ class HelpScreen extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: Image.network(
-                            'https://cdn.builder.io/api/v1/image/assets/f19143deba86463b9da27db7e011b3a1/2687525fbf59c3b7416b5cf833665d81e18a6b08948d6d36299e3336ae58bcab?apiKey=f19143deba86463b9da27db7e011b3a1&',
+                    'https://cdn.builder.io/api/v1/image/assets/f19143deba86463b9da27db7e011b3a1/2687525fbf59c3b7416b5cf833665d81e18a6b08948d6d36299e3336ae58bcab?apiKey=f19143deba86463b9da27db7e011b3a1&',
                     fit: BoxFit.contain,
                     width: double.infinity,
                   ),
@@ -70,9 +74,14 @@ class HelpScreen extends StatelessWidget {
                 const SizedBox(height: 33),
                 // Call Button
                 ElevatedButton(
-                  onPressed: () {
+                  onPressed: () async {
                     debugPrint('Call button pressed');
-                    // TODO: Implement call functionality
+                    final Uri phoneUri = Uri(scheme: 'tel', path: '+250780700056'); // Replace with the actual phone number
+                    if (await canLaunchUrl(phoneUri)) {
+                      await launchUrl(phoneUri);
+                    } else {
+                      throw 'Could not launch $phoneUri';
+                    }
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF6EF4A4),
@@ -109,7 +118,13 @@ class HelpScreen extends StatelessWidget {
                 ElevatedButton(
                   onPressed: () {
                     debugPrint('Text button pressed');
-                    // TODO: Implement text/chat functionality
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            ChatScreen(therapistName: therapistName),
+                      ),
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF6EF4A4),
@@ -151,9 +166,9 @@ class HelpScreen extends StatelessWidget {
   }
 }
 
-// Standard Back Arrow Widget (used in previous files)
+// Standard Back Arrow Widget remains unchanged
 class BackArrow extends StatelessWidget {
-  const BackArrow({Key? key}) : super(key: key);
+  const BackArrow({super.key});
 
   @override
   Widget build(BuildContext context) {

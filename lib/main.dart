@@ -1,20 +1,23 @@
-// lib/main.dart
 import 'package:flutter/material.dart';
-import 'package:wellnest/screens/emotional_journey_screen.dart';
-import 'package:wellnest/screens/Discover_screen.dart';
-import 'package:wellnest/screens/help_screen.dart';
-import 'package:wellnest/screens/journal_screen.dart';
-import 'package:wellnest/screens/mood_tracking_screen.dart';
-import 'package:wellnest/screens/support_groups_screen.dart';
-import 'package:wellnest/screens/therapists_screen.dart';
+import 'dart:io' show Platform;
+import 'package:hive_flutter/adapters.dart';
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
+import 'package:wellnest/screens/login_screen.dart';
 
-import 'screens/home_screen.dart';
 
-void main() {
+Future<void> main() async {
+  if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
+    sqfliteFfiInit();
+    databaseFactory = databaseFactoryFfi;
+  }
+  await Hive.initFlutter();
+  await Hive.openBox('responseCache');
   runApp(WellNestApp());
 }
 
 class WellNestApp extends StatelessWidget {
+  const WellNestApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -24,7 +27,7 @@ class WellNestApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.white,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: HelpScreen(),
+      home: LoginScreen(),
     );
   }
 }
