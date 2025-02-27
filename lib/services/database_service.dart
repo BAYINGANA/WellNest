@@ -76,6 +76,20 @@ class DatabaseService {
     return null; // No user found
   }
 
+  Future<User?> getUserByEmail(String email) async {
+    final db = await database;
+    final result = await db.query(
+      'users',
+      where: 'email = ?',
+      whereArgs: [email],
+    );
+
+    if (result.isNotEmpty) {
+      return User.fromMap(result.first);
+    }
+    return null; // No user found
+  }
+
   // --- Journal Entry Methods ---
   Future<int> insertJournalEntry(JournalEntry entry) async {
     final db = await database;

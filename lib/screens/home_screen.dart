@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wellnest/screens/discover_screen.dart';
 import 'package:wellnest/screens/emotional_journey_screen.dart';
+import 'package:wellnest/screens/login_screen.dart';
 import 'package:wellnest/screens/support_groups_screen.dart';
 import 'package:wellnest/screens/therapists_screen.dart';
 
@@ -33,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   // Top Row: Back Arrow + "WellNest" (centered)
                   Row(
                     children: [
-                      const Icon(Icons.menu),
+                      const LogOut(),
                       Expanded(
                         child: Center(
                           child: Text(
@@ -144,6 +145,26 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
+class LogOut extends StatelessWidget {
+
+  const LogOut({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      icon: const Icon(Icons.logout, color: Colors.black,),
+      onPressed: () {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => LoginScreen(),
+          ),
+        );
+      },
+    );
+  }
+}
+
 // The OptionCard widget remains unchanged.
 class OptionCard extends StatelessWidget {
   final String title;
@@ -167,7 +188,7 @@ class OptionCard extends StatelessWidget {
         margin: const EdgeInsets.symmetric(horizontal: 20),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(30),
-          color: const Color(0xFF6EF4A4),
+          color: const Color(0xFFA1EEBD),
           boxShadow: [
             BoxShadow(
               color: Colors.grey.shade300,

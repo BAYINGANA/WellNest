@@ -2,53 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:wellnest/screens/home_screen.dart';
 import 'package:wellnest/screens/signup_screen.dart';
+import 'package:wellnest/services/database_service.dart';
 
-/// ------------------------------
-///  CLIPPERS FOR CURVED SHAPES
-/// ------------------------------
-class TopCircularClipper extends CustomClipper<Path> {
-  @override
-  Path getClip(Size size) {
-    final path = Path();
-    path.moveTo(0, 0);
-    path.lineTo(0, size.height * 0.8);
-    path.quadraticBezierTo(
-      size.width / 2,
-      size.height,
-      size.width,
-      size.height * 0.8,
-    );
-    path.lineTo(size.width, 0);
-    return path;
-  }
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({Key? key}) : super(key: key);
 
   @override
-  bool shouldReclip(CustomClipper<Path> oldClipper) => false;
+  State<LoginScreen> createState() => _LoginScreenState();
 }
-
-class BottomCircularClipper extends CustomClipper<Path> {
-  @override
-  Path getClip(Size size) {
-    final path = Path();
-    path.moveTo(0, size.height * 0.2);
-    path.quadraticBezierTo(
-      size.width / 2,
-      0,
-      size.width,
-      size.height * 0.2,
-    );
-    path.lineTo(size.width, size.height);
-    path.lineTo(0, size.height);
-    return path;
-  }
-
-  @override
-  bool shouldReclip(CustomClipper<Path> oldClipper) => false;
-}
-
-/// ------------------------------
-///  THEME CONSTANTS
-/// ------------------------------
 class ThemeConstants {
   static const Color primaryPurple = Color(0xFF7472E0);
   static const Color darkBlue = Color(0xFF242364);
@@ -112,27 +73,64 @@ class ThemeConstants {
   }
 }
 
-/// ------------------------------
-///  MAIN LOGIN SCREEN
-/// ------------------------------
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+class TopCircularClipper extends CustomClipper<Path> {
+  @override
+  Path getClip(Size size) {
+    final path = Path();
+    path.lineTo(0, 150);
+    path.quadraticBezierTo(size.width / 2, 200, size.width, 150);
+    path.lineTo(size.width, 0);
+    path.close();
+    return path;
+  }
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  bool shouldReclip(CustomClipper<Path> oldClipper) => false;
+}
+
+class BottomCircularClipper extends CustomClipper<Path> {
+  @override
+  Path getClip(Size size) {
+    final path = Path();
+    path.moveTo(0, size.height);
+    path.lineTo(0, 20);
+    path.quadraticBezierTo(size.width / 2, -30, size.width, 20);
+    path.lineTo(size.width, size.height);
+    path.close();
+    return path;
+  }
+
+  @override
+  bool shouldReclip(CustomClipper<Path> oldClipper) => false;
 }
 
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
-
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
-  @override
-  void dispose() {
-    _emailController.dispose();
-    _passwordController.dispose();
-    super.dispose();
+  final DatabaseService _dbService = DatabaseService();
+
+  Future<void> _signIn() async {
+    if (_formKey.currentState!.validate()) {
+      final email = _emailController.text.trim();
+      final password = _passwordController.text.trim();
+
+      // Check if the user exists in SQLite
+      final user = await _dbService.loginUser(email, password);
+
+      if (user != null) {
+        // Navigate to the home screen
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const HomeScreen()),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Invalid email or password')),
+        );
+      }
+    }
   }
 
   @override
@@ -201,20 +199,40 @@ class _LoginScreenState extends State<LoginScreen> {
               controller: _emailController,
               decoration: ThemeConstants.inputDecoration(
                 'Email',
-                icon: Icons.email_outlined,
+              ).copyWith(
+                prefixIcon: const Icon(Icons.email_outlined, color: Colors.grey),
               ),
               style: ThemeConstants.inputStyle,
               keyboardType: TextInputType.emailAddress,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter your email';
+                }
+                if (!value.contains('@')) {
+                  return 'Please enter a valid email';
+                }
+                return null;
+              },
             ),
             const SizedBox(height: 22),
             TextFormField(
               controller: _passwordController,
               decoration: ThemeConstants.inputDecoration(
                 'Password',
-                icon: Icons.lock_outline,
+              ).copyWith(
+                prefixIcon: const Icon(Icons.lock_outline, color: Colors.grey),
               ),
               style: ThemeConstants.inputStyle,
               obscureText: true,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter your password';
+                }
+                if (value.length < 6) {
+                  return 'Password must be at least 6 characters';
+                }
+                return null;
+              },
             ),
             const SizedBox(height: 48),
 
@@ -222,17 +240,7 @@ class _LoginScreenState extends State<LoginScreen> {
             SizedBox(
               width: 311,
               child: TextButton(
-                onPressed: () {
-                  if (_formKey.currentState?.validate() ?? false) {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            HomeScreen(),
-                      ),
-                    );// Handle login
-                  }
-                },
+                onPressed: _signIn, // Call the _signIn method here
                 style: TextButton.styleFrom(
                   backgroundColor: ThemeConstants.lightGreen,
                   padding: const EdgeInsets.symmetric(
@@ -252,61 +260,34 @@ class _LoginScreenState extends State<LoginScreen> {
 
             const SizedBox(height: 21),
 
-            // Sign in with Google button
-            SizedBox(
-              width: 311,
-              child: TextButton(
-                onPressed: () {
-                  // Handle Google sign in
-                },
-                style: TextButton.styleFrom(
-                  backgroundColor: ThemeConstants.lightGreen,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 70,
-                    vertical: 10,
-                  ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                ),
-                child: Text(
-                  'Sign in with Google',
-                  style: ThemeConstants.buttonStyle,
-                ),
-              ),
-            ),
-
-            const SizedBox(height: 33),
-
             // Create account text
-        GestureDetector(
-          onTap : (){
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) =>
-                    RegisterScreen(),
-              ),
-            );
-          },
-          child: RichText(
-              text: TextSpan(
-                children: [
-                  TextSpan(
-                    text: 'Create Account ',
-                    style: ThemeConstants.loginTextStyle,
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const RegisterScreen(),
                   ),
-                  TextSpan(
-                    text: 'Sign Up',
-                    style: ThemeConstants.loginTextStyle.copyWith(
-                      fontWeight: FontWeight.w600,
-                      color: ThemeConstants.signUpPurple,
+                );
+              },
+              child: RichText(
+                text: TextSpan(
+                  children: [
+                    TextSpan(
+                      text: 'Create Account ',
+                      style: ThemeConstants.loginTextStyle,
                     ),
-                  ),
-                ],
+                    TextSpan(
+                      text: 'Sign Up',
+                      style: ThemeConstants.loginTextStyle.copyWith(
+                        fontWeight: FontWeight.w600,
+                        color: ThemeConstants.signUpPurple,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
-        ),
 
             const SizedBox(height: 56),
           ],
