@@ -4,7 +4,7 @@ import 'package:wellnest/screens/login_screen.dart';
 
 /// A complete, single-file implementation of the Register Screen
 class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({Key? key}) : super(key: key);
+  const RegisterScreen({super.key});
 
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
@@ -57,7 +57,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           child: Container(
             height: 220,
             width: double.infinity,
-            color: ThemeConstants.lightBlue.withOpacity(0.7),
+            color: ThemeConstants.lightBlue.withValues(alpha: 0.7),
             child: ClipPath(
               clipper: TopCircularClipper(),
               child: Container(
@@ -203,7 +203,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           child: Container(
             height: 160,
             width: double.infinity,
-            color: ThemeConstants.lightBlue.withOpacity(0.7),
+            color: ThemeConstants.lightBlue.withValues(alpha: 0.7),
             child: ClipPath(
               clipper: BottomCircularClipper(),
               child: Container(

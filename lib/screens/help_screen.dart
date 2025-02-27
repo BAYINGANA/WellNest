@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:wellnest/screens/chat_screen.dart'; // Import the new ChatScreen
 
 class HelpScreen extends StatelessWidget {
@@ -73,9 +74,14 @@ class HelpScreen extends StatelessWidget {
                 const SizedBox(height: 33),
                 // Call Button
                 ElevatedButton(
-                  onPressed: () {
+                  onPressed: () async {
                     debugPrint('Call button pressed');
-                    // TODO: Implement call functionality
+                    final Uri phoneUri = Uri(scheme: 'tel', path: '+250780700056'); // Replace with the actual phone number
+                    if (await canLaunchUrl(phoneUri)) {
+                      await launchUrl(phoneUri);
+                    } else {
+                      throw 'Could not launch $phoneUri';
+                    }
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF6EF4A4),

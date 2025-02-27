@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wellnest/screens/call_screen.dart';
+import 'package:wellnest/screens/emmergency_contacts_screen.dart';
 import 'package:wellnest/widgets/navigation_bar.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart'; // For playing YouTube videos
 import 'package:audioplayers/audioplayers.dart'; // For playing sounds
@@ -30,7 +30,7 @@ class DiscoverScreen extends StatelessWidget {
                 Shadow(
                   offset: const Offset(0, 4),
                   blurRadius: 4,
-                  color: Colors.black.withOpacity(0.25),
+                  color: Colors.black.withValues(alpha: 0.25),
                 ),
               ],
             ),
@@ -65,6 +65,7 @@ class DiscoverScreen extends StatelessWidget {
 }
 
 /// Immediate Help Button Section
+
 class ImmediateHelpButton extends StatelessWidget {
   const ImmediateHelpButton({super.key});
 
@@ -73,7 +74,7 @@ class ImmediateHelpButton extends StatelessWidget {
     return Column(
       children: [
         const Text(
-          'Are you or anybody near you facing any issue',
+          'Are you or anybody near you facing any issue?',
           style: TextStyle(
             color: Colors.black,
             fontSize: 20,
@@ -85,7 +86,7 @@ class ImmediateHelpButton extends StatelessWidget {
         const SizedBox(height: 20),
         ElevatedButton(
           style: ElevatedButton.styleFrom(
-            backgroundColor: const Color(0xFFA1EEBD), // Updated to 0xFFA1EEBD
+            backgroundColor: const Color(0xFFA1EEBD),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(50),
             ),
@@ -96,14 +97,14 @@ class ImmediateHelpButton extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const CallScreen(),
+                builder: (context) => const EmergencyContactsScreen(),
               ),
             );
           },
           child: const Text(
             'Need immediate help!',
             style: TextStyle(
-              color: Colors.white, // White text for contrast
+              color: Colors.white,
               fontSize: 20,
               fontWeight: FontWeight.bold,
               fontFamily: 'Bitter',
@@ -114,6 +115,7 @@ class ImmediateHelpButton extends StatelessWidget {
     );
   }
 }
+
 
 /// Guided Meditation & Stress Relief Section
 class MeditationSection extends StatelessWidget {
@@ -394,7 +396,7 @@ class MeditationCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.2),
+              color: Colors.black.withValues(alpha: 0.2),
               blurRadius: 10,
               offset: const Offset(0, 10),
             ),

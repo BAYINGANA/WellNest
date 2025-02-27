@@ -4,9 +4,7 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 import 'package:wellnest/screens/login_screen.dart';
-import 'package:wellnest/screens/signup_screen.dart';
 
-import 'screens/home_screen.dart';
 
 Future<void> main() async {
   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {

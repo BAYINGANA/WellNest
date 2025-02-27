@@ -1,7 +1,7 @@
-// lib/services/database_service.dart
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
+import '../models/user.dart';
 import '../models/journal_entry.dart';
 
 class DatabaseService {
@@ -32,19 +32,51 @@ class DatabaseService {
   Future _createDB(Database db, int version) async {
     const idType = 'INTEGER PRIMARY KEY AUTOINCREMENT';
     const textType = 'TEXT NOT NULL';
-    const intType = 'INTEGER NOT NULL';
 
     await db.execute('''
-      CREATE TABLE journal_entries (
-        id $idType,
-        date $textType,
-        mood $textType,
-        mood_color $intType,
-        content $textType
-      )
+    CREATE TABLE users (
+      id $idType,
+      full_name $textType,
+      email $textType UNIQUE,
+      password $textType
+    )
+    ''');
+
+    await db.execute('''
+    CREATE TABLE journal_entries (
+      id $idType,
+      date $textType,
+      mood $textType,
+      mood_color INTEGER NOT NULL,
+      content $textType
+    )
     ''');
   }
 
+  // --- User Authentication Methods ---
+
+  // Register a new user
+  Future<int> registerUser(User user) async {
+    final db = await database;
+    return await db.insert('users', user.toMap());
+  }
+
+  // Login: Check if user exists
+  Future<User?> loginUser(String email, String password) async {
+    final db = await database;
+    final result = await db.query(
+      'users',
+      where: 'email = ? AND password = ?',
+      whereArgs: [email, password],
+    );
+
+    if (result.isNotEmpty) {
+      return User.fromMap(result.first);
+    }
+    return null; // No user found
+  }
+
+  // --- Journal Entry Methods ---
   Future<int> insertJournalEntry(JournalEntry entry) async {
     final db = await database;
     return await db.insert('journal_entries', entry.toMap());
