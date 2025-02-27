@@ -3,7 +3,7 @@ import 'package:wellnest/screens/help_screen.dart';
 import 'package:wellnest/widgets/navigation_bar.dart';
 
 class TherapistScreen extends StatelessWidget {
-  const TherapistScreen({Key? key}) : super(key: key);
+  const TherapistScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -117,7 +117,7 @@ class TherapistScreen extends StatelessWidget {
 }
 
 class BackArrow extends StatelessWidget {
-  const BackArrow({Key? key}) : super(key: key);
+  const BackArrow({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -136,11 +136,11 @@ class DoctorCard extends StatelessWidget {
   final String imageUrl;
 
   const DoctorCard({
-    Key? key,
+    super.key,
     required this.name,
     required this.specialty,
     required this.imageUrl,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

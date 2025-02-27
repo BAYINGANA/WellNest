@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'journal_screen.dart';
 
 class MoodScreen extends StatefulWidget {
-  const MoodScreen({Key? key}) : super(key: key);
+  const MoodScreen({super.key});
 
   @override
   State<MoodScreen> createState() => _MoodScreenState();

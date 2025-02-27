@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wellnest/screens/Discover_screen.dart';
+import 'package:wellnest/screens/emotional_journey_screen.dart';
 import 'package:wellnest/screens/home_screen.dart';
 import 'package:wellnest/screens/mood_tracking_screen.dart';
 import 'package:wellnest/screens/profile_screen.dart';
@@ -28,7 +29,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
       case 2:
         return const TherapistScreen();
       case 3:
-        return const MoodScreen();
+        return const EmotionalJourneyScreen();
       case 4:
         return const ProfileScreen();
       default:

@@ -5,7 +5,7 @@ import 'package:wellnest/screens/chat_screen.dart'; // Import the new ChatScreen
 class HelpScreen extends StatelessWidget {
   final String therapistName;
 
-  const HelpScreen({Key? key, required this.therapistName}) : super(key: key);
+  const HelpScreen({super.key, required this.therapistName});
 
   @override
   Widget build(BuildContext context) {
@@ -162,7 +162,7 @@ class HelpScreen extends StatelessWidget {
 
 // Standard Back Arrow Widget remains unchanged
 class BackArrow extends StatelessWidget {
-  const BackArrow({Key? key}) : super(key: key);
+  const BackArrow({super.key});
 
   @override
   Widget build(BuildContext context) {

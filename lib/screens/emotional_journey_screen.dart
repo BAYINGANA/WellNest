@@ -1,9 +1,8 @@
-// lib/screens/emotional_journey_screen.dart
 import 'package:flutter/material.dart';
-
-import '../models/journal_entry.dart';
-import '../services/database_service.dart';
-import 'mood_tracking_screen.dart';
+import 'package:wellnest/models/journal_entry.dart';
+import 'package:wellnest/services/database_service.dart';
+import 'package:wellnest/screens/mood_tracking_screen.dart';
+import 'package:wellnest/widgets/navigation_bar.dart'; // Import the custom navigation bar
 
 class EmotionalJourneyScreen extends StatefulWidget {
   const EmotionalJourneyScreen({super.key});
@@ -27,14 +26,35 @@ class _EmotionalJourneyScreenState extends State<EmotionalJourneyScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // Replace the AppBar with the custom header
       appBar: AppBar(
-        title: const Text('WellNest'),
+        backgroundColor: Colors.white, // Match the background color
+        elevation: 0, // Remove shadow
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back, color: Colors.black), // Back arrow
           onPressed: () => Navigator.pop(context),
         ),
-        centerTitle: true,
-        backgroundColor: Colors.deepPurple.shade700,
+        title: Center(
+          child: Text(
+            'WellNest',
+            style: TextStyle(
+              color: const Color(0xFF242364),
+              fontSize: 32,
+              fontWeight: FontWeight.bold,
+              fontFamily: 'Bitter',
+              shadows: [
+                Shadow(
+                  offset: const Offset(0, 4),
+                  blurRadius: 4,
+                  color: Colors.black.withOpacity(0.25),
+                ),
+              ],
+            ),
+          ),
+        ),
+        actions: const [
+          SizedBox(width: 48), // Spacer to balance the row
+        ],
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -111,16 +131,16 @@ class _EmotionalJourneyScreenState extends State<EmotionalJourneyScreen> {
                       return Column(
                         children: snapshot.data!
                             .map((entry) => Padding(
-                                  padding: const EdgeInsets.only(bottom: 14),
-                                  child: JournalEntryWidget(
-                                    date: _formatDate(entry.date),
-                                    dateColor: Color(entry.moodColor),
-                                    title: 'Dear Me,',
-                                    content: entry.content,
-                                    onTap: () => debugPrint(
-                                        'Tapped entry: ${entry.date}'),
-                                  ),
-                                ))
+                          padding: const EdgeInsets.only(bottom: 14),
+                          child: JournalEntryWidget(
+                            date: _formatDate(entry.date),
+                            dateColor: Color(entry.moodColor),
+                            title: 'Dear Me,',
+                            content: entry.content,
+                            onTap: () => debugPrint(
+                                'Tapped entry: ${entry.date}'),
+                          ),
+                        ))
                             .toList(),
                       );
                     }
@@ -130,6 +150,10 @@ class _EmotionalJourneyScreenState extends State<EmotionalJourneyScreen> {
             ),
           ),
         ),
+      ),
+      // Add the CustomBottomNavigationBar
+      bottomNavigationBar: const CustomBottomNavigationBar(
+        selectedIndex: 3, // Set the selected index for this screen
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
@@ -253,9 +277,9 @@ class _CalendarWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
                 .map((day) => Text(
-                      day,
-                      style: const TextStyle(fontSize: 14, color: Colors.white),
-                    ))
+              day,
+              style: const TextStyle(fontSize: 14, color: Colors.white),
+            ))
                 .toList(),
           ),
           const SizedBox(height: 16),
@@ -302,9 +326,9 @@ class _CalendarWidget extends StatelessWidget {
     return Column(
       children: rows
           .map((weekRow) => Padding(
-                padding: const EdgeInsets.only(bottom: 4),
-                child: weekRow,
-              ))
+        padding: const EdgeInsets.only(bottom: 4),
+        child: weekRow,
+      ))
           .toList(),
     );
   }

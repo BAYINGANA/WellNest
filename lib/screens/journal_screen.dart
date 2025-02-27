@@ -27,20 +27,34 @@ class _JournalScreenState extends State<JournalScreen> {
 
   Future<void> _saveEntry() async {
     String content = _noteController.text.trim();
-    if (content.isNotEmpty) {
+    if (content.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Please enter some text')),
+      );
+      return;
+    }
+
+    try {
       JournalEntry entry = JournalEntry(
         date: widget.date,
         mood: widget.mood,
-        moodColor: widget.moodColor.value, // Store the ARGB value as int
+        moodColor: widget.moodColor.value,
         content: content,
       );
+      debugPrint('Saving entry: ${entry.toMap()}');
       await dbService.insertJournalEntry(entry);
+      debugPrint('Entry saved successfully');
       Navigator.push(
         context,
         MaterialPageRoute(
           builder: (context) => const EmotionalJourneyScreen(),
         ),
-      ); // Return to EmotionalJourneyScreen
+      );
+    } catch (e) {
+      debugPrint('Error saving entry: $e');
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Failed to save entry: $e')),
+      );
     }
   }
 

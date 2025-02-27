@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class TherapyScreen extends StatelessWidget {
-  const TherapyScreen({Key? key}) : super(key: key);
+  const TherapyScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -126,12 +126,12 @@ class HelpCategoryCard extends StatelessWidget {
   final VoidCallback onTap;
 
   const HelpCategoryCard({
-    Key? key,
+    super.key,
     required this.image,
     required this.title,
     required this.description,
     required this.onTap,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

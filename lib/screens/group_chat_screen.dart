@@ -5,7 +5,7 @@ import '../models/message_model.dart';
 class GroupChatScreen extends StatefulWidget {
   final String groupName;
 
-  const GroupChatScreen({Key? key, required this.groupName}) : super(key: key);
+  const GroupChatScreen({super.key, required this.groupName});
 
   @override
   State<GroupChatScreen> createState() => _GroupChatScreenState();
